@@ -3,8 +3,8 @@ project(HW_2 C CXX)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  --coverage")
-set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} --coverage")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wpedantic  --coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wpedantic --coverage")
 
 set(SOURCES_FOR_STATIC libs/find_words/src/find_words.c)
 set(SOURCES_FOR_SHARED libs/find_words_forked/src/find_words_forked.c)

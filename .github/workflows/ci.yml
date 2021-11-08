@@ -27,5 +27,5 @@ jobs:
         run: ./build/stress_test && ./build/stress_test_forked
 
       - name: code coverage
-        run: cd build && ./tests && cd ../ && gcovr -r . -e 'tests/' && cd build && ./tests_forked && cd ../ && gcovr -r . -e 'tests/'
+        run: cd build && ./tests && ./tests_forked && cd ../ && gcovr -r . -e 'tests/'
 
