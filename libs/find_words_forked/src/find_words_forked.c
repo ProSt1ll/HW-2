@@ -13,7 +13,9 @@ int *find_word_forked(const char *file_path, const char *file_word) {
     }
 
     int words_size = find_size_word(file_word);
-    int *ind = (int *) mmap(NULL, sizeof(int ) * words_size, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, 0,0);
+    int *ind = (int *) mmap(NULL, sizeof(int) * words_size,
+                            PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS,
+                            0, 0);
 
     struct mymsgbuf {
         size_t mtype;
@@ -39,7 +41,8 @@ int *find_word_forked(const char *file_path, const char *file_word) {
     for (size_t k = 0; k < max_forks; ++k) {
         pids[k] = fork();
         if (pids[k] == 0) {
-            while (msgrcv(q_id, &qbuf, sizeof(size_t), qbuf.mtype, IPC_NOWAIT) == sizeof(size_t)) {
+            while (msgrcv(q_id, &qbuf, sizeof(size_t), qbuf.mtype,
+                          IPC_NOWAIT) == sizeof(size_t)) {
                 char *cur_word = input_words(file_word, qbuf.numb + 1);
                 ind[qbuf.numb] = word_place(ptr, cur_word);
                 free(cur_word);
@@ -57,14 +60,13 @@ int *find_word_forked(const char *file_path, const char *file_word) {
 
     int *ret_ind = (int *) calloc(words_size, sizeof(int));
 
-    for(size_t i = 0;i < words_size;i++){
+    for (size_t i = 0; i < words_size; i++) {
         ret_ind[i] = ind[i];
     }
     munmap(ind, sizeof(int) * words_size);
 
     return ret_ind;
 }
-
 
 
 int find_size(const char *word) {
@@ -76,7 +78,6 @@ int find_size(const char *word) {
         i++;
     }
     return i;
-
 }
 
 
@@ -94,13 +95,13 @@ char *input_words(const char *file_path, int num) {
     int size_col = find_size_col_word(file_path, num);
 
 
-    char *array = (char *) calloc(size_col,sizeof(char *));
+    char *array = (char *) calloc(size_col, sizeof(char *));
 
     if (array == NULL) {
         fclose(ptr);
         return NULL;
     }
-    char c =0;
+    char c = 0;
     for (i = 0; i < num - 1; i++) {
         while ((fscanf(ptr, "%c", &c) == 1) && (c != '\n')) {
         }
@@ -135,11 +136,9 @@ int find_size_word(const char *file_path) {
     i++;
     fclose(ptr);
     return i;
-
 }
 
 int find_size_col_word(const char *file_path, int num) {
-
     FILE *ptr = fopen(file_path, "r");
 
     if ((ptr == NULL) || (num < 0)) {
@@ -197,8 +196,10 @@ char *input_file(const char *file_path, int num) {
     int size_col = find_size_col_word(file_path, num);
 
 
-    char *array = (char *) mmap(NULL, sizeof(char) * size_col, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, 0,
-                                0);
+    char *array = (char *) mmap(NULL, sizeof(char) * size_col,
+                                PROT_READ | PROT_WRITE,
+                                MAP_SHARED | MAP_ANONYMOUS,
+                                0, 0);
 
     if (array == NULL) {
         fclose(ptr);

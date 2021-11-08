@@ -34,7 +34,6 @@ int find_size(const char *word) {
         i++;
     }
     return i;
-
 }
 
 
@@ -50,13 +49,13 @@ char *input_words(const char *file_path, int num) {
 
     size_t i;
     int size_col = find_size_col_word(file_path, num);
-    char *array = (char *) calloc(size_col,sizeof(char *));
+    char *array = (char *) calloc(size_col, sizeof(char *));
 
     if (array == NULL) {
         fclose(ptr);
         return NULL;
     }
-    char c =0;
+    char c = 0;
     for (i = 0; i < num - 1; i++) {
         while ((fscanf(ptr, "%c", &c) == 1) && (c != '\n')) {
         }
@@ -69,7 +68,6 @@ char *input_words(const char *file_path, int num) {
 
     fclose(ptr);
     return array;
-
 }
 
 int find_size_word(const char *file_path) {
@@ -91,11 +89,9 @@ int find_size_word(const char *file_path) {
     i++;
     fclose(ptr);
     return i;
-
 }
 
 int find_size_col_word(const char *file_path, int num) {
-
     FILE *ptr = fopen(file_path, "r");
 
     if ((ptr == NULL) || (num < 0)) {
