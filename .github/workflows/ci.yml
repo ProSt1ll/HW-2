@@ -27,11 +27,7 @@ jobs:
         run: ./build/stress_test && ./build/stress_test_forked
 
       - name: code coverage
-        run: lcov -t "HW-2" -o coverage.txt -c -d . && cp coverage.txt ../
+        run: gcovr -r . -e 'tests/'
 
-      - name: upload coverage to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.txt
-          flags: unittests
+
+
