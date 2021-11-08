@@ -24,7 +24,7 @@ jobs:
         run: valgrind --leak-check=full --track-origins=yes ./build/tests && valgrind --leak-check=full --track-origins=yes --child-silent-after-fork=yes  ./build/tests_forked
 
       - name: stress_tests_avg_time
-        run: ./build/stress_test && ./build/stress_test_fork
+        run: ./build/stress_test && ./build/stress_test_forked
 
       - name: code coverage
         run: lcov -t "HW-2" -o coverage.txt -c -d . && cp coverage.txt ../
