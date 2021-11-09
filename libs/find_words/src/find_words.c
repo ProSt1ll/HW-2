@@ -53,6 +53,7 @@ char *input_words(const char *file_path, int num) {
     char *array = (char *) calloc(size_col,sizeof(char *));
 
     if (array == NULL) {
+        fclose(ptr);
         return NULL;
     }
     char c =0;

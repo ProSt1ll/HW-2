@@ -97,6 +97,7 @@ char *input_words(const char *file_path, int num) {
     char *array = (char *) calloc(size_col,sizeof(char *));
 
     if (array == NULL) {
+        fclose(ptr);
         return NULL;
     }
     char c =0;
@@ -200,6 +201,8 @@ char *input_file(const char *file_path, int num) {
                                 0);
 
     if (array == NULL) {
+        fclose(ptr);
+
         return NULL;
     }
     size_t size;
