@@ -23,6 +23,6 @@ int main() {
         free(ind);
     }
     double avg_time = timer / NUM_OF_TESTS;
-    std::cout << "average time: " << avg_time << std::endl;
+    std::cout << "time: " << avg_time << std::endl;
     return 0;
 }

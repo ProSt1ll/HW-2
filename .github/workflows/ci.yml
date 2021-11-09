@@ -30,3 +30,10 @@ jobs:
       - name: code coverage
         run: cd build && ./tests && ./tests_forked && cd ../ && gcovr -r . -e 'tests/'
 
+      - name: upload coverage to Codecov
+        run: lcov -t "HW-2" -o coverage.txt -c -d . && cp coverage.txt ../
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.txt
+          flags: unittests
